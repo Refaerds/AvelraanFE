@@ -1,5 +1,65 @@
-$body-bg: #000;
+// My variables
+
+$success: #629c72;
+$danger: #b3003b;
+$av-dim-green: #7c8a80;
+$av-light-green: #a5c2ad;
+$av-shadow-green: #536157;
+$black-30: rgba(0, 0, 0, 0.3);
+$black-70: rgba(0, 0, 0, 0.7);
+$white-05: rgba(255, 255, 255, 0.05);
+$white-50: rgba(255, 255, 255, 0.5);
+$av-light-yellow: #FFDEAD;
+$input-color: black;
+
 
 // Bootstrap and BootstrapVue SCSS files
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
+
+// My styles
+
+html { font-size: 20px; }
+
+html, body {
+  height: 100%;
+  font-family: 'Tenali Ramakrishna', sans-serif;
+  color: $av-light-yellow;
+  line-height: 1.25rem;
+}
+
+.bg-black-70 { background-color: $black-70; }
+.text-white-50 { color: $white-50; }
+.text-av-light-yellow { color: $av-light-yellow; }
+
+// Nav
+
+a.nav-link {
+  color: $av-dim-green;
+  background-color: $white-05;
+  margin: 0 0.25rem;
+  border-radius: 5%;
+}
+
+a.nav-link:hover, a.nav-link.active {
+  color: $av-light-green;
+  background-color: $black-70;
+}
+
+a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px; }
+
+//TheNavBar
+
+#the_nav_bar {
+  a.nav-link { background-color: $black-30; }
+}
+
+// Button
+button[disabled] {
+  cursor: not-allowed;
+}
+
+// Tooltip
+.tooltip {
+  font-family: 'Tenali Ramakrishna', sans-serif;
+}
