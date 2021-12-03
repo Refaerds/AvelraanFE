@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import playerData from './modules/player-module';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    state: {
-
+    root: true,
+    modules: {
+        playerData
     },
-    mutations: {
-    }
 });
 
 export default store;
