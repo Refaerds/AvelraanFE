@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Description
+Vue2 front-end for the online pen-and-paper game [Avelraan](https://github.com/IonutDjonIancu/Avelraangame).
