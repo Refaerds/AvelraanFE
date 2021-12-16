@@ -66,3 +66,15 @@ button[disabled] {
 .tooltip {
   font-family: 'Tenali Ramakrishna', sans-serif;
 }
+
+// Toaster
+.b-toast-danger .toast, .b-toast-danger .toast .toast-header {
+  background-color: $danger;
+  border-color: $danger;
+  opacity: 0.8;
+  color: $av-light-yellow;
+}
+
+.b-toast .toast .toast-body {
+  padding-top: 0;
+}

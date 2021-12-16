@@ -38,10 +38,20 @@ export const signUp = (payload) => {
         headers,
         method: 'POST',
         body: JSON.stringify({
-            "PlayerName": payload.PlayerName,
-            "Ward": payload.Ward,
-            "Wardcheck": payload.Wardcheck,
-            "Symbol": payload["Symbol"]
+            message: JSON.stringify({
+                "PlayerName": payload.PlayerName,
+                "Ward": payload.Ward,
+                "Wardcheck": payload.Wardcheck,
+                "Symbol": payload["Symbol"]
+            })
         })
     })
+        .then(response => {
+            if (response.ok) return response.json();
+            else throwServerError(response.status);
+        })
+        .then(data => {
+            if (data['Error']) throwCustomError(data['Error']);
+            else return JSON.parse(data.Data);
+        })
 };

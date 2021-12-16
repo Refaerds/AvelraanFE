@@ -17,6 +17,8 @@ export const getErrorText = (error) => {
         switch (error.message) {
             case 'ResourceNotFound: the symbol ward matched no player.':
                 return 'The username, ward or symbol is invalid.'
+            case 'Failure: player already exists.':
+                return 'A player with such username already exists. Please try another one.'
             default:
                 return error.message;
         }

@@ -12,8 +12,8 @@
 <!--    Sign in / Sing up-->
     <div v-else class>
         <b-nav align="right">
-            <b-nav-item @click="tab = options.SIGN_IN" :active="!isSignUpTab">Sign In</b-nav-item>
-            <b-nav-item @click="tab = options.SIGN_UP" :active="isSignUpTab">Sign Up</b-nav-item>
+            <b-nav-item @click="tab = options.SIGN_IN" :active="!isSignUpTab">{{ options.SIGN_IN }}</b-nav-item>
+            <b-nav-item @click="tab = options.SIGN_UP" :active="isSignUpTab">{{ options.SIGN_UP }}</b-nav-item>
         </b-nav>
         <b-row class="mt-4">
             <b-col cols="12" sm="8" md="6" class="mx-auto">
@@ -62,6 +62,7 @@
                                  trim
                                  :state="passwordIsValid"
                                  v-model="password"
+                                 @keyup.enter="!isSignUpTab && authenticateUser()"
                         ></b-input>
                         <b-form-invalid-feedback>
                             The password should not exceed 4 characters, and may contain only latin letters and numbers.
@@ -78,6 +79,7 @@
                                  trim
                                  :state="confirmedPasswordIsValid"
                                  v-model="passwordConfirmed"
+                                 @keyup.enter="isSignUpTab && authenticateUser()"
                         ></b-input>
                         <b-form-invalid-feedback>
                             The passwords don't match.
@@ -89,7 +91,7 @@
                               :disabled="actionButtonIsDisabled"
                               @click="authenticateUser"
                     >
-                        <div v-if="signInLoading" class="d-flex align-items-center py-1 px-2">
+                        <div v-if="loading" class="d-flex align-items-center py-1 px-2">
                             <b-spinner small></b-spinner>
                         </div>
                         <span v-else>{{ tab }}</span>
@@ -97,6 +99,8 @@
                 </div>
             </b-col>
         </b-row>
+
+        <toaster id="auth-error-toast" :text="error"></toaster>
     </div>
 
 </div>
@@ -104,11 +108,14 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import Toaster from "../components/shared/Toaster";
+
 const SIGN_IN = 'Sign in', SIGN_UP = 'Sign up';
 const EPSILON = 'Epsilon', OMICRON = 'Omicron', SIGMA = 'Sigma';
 
 export default {
     name: "Home",
+    components: { Toaster },
     data() {
         return {
             tab: SIGN_IN,
@@ -128,17 +135,21 @@ export default {
     computed: {
         ...mapState({
             isSignedIn: state => state.playerData.isSignedIn,
-            signInLoading: state => state.playerData.signInLoading,
-            signInError: state => state.playerData.signInError,
+            loading: state => state.playerData.loading,
+            error: state => state.playerData.error,
             playerName: state => state.playerData.playerName,
         }),
         isSignUpTab() {
             return this.tab === SIGN_UP;
         },
         actionButtonIsDisabled() {
-            const signInInputsFilled = this.selectedSymbol && this.username && this.password;
-            const anyInputIsMissing = this.tab === SIGN_IN ? !signInInputsFilled : !(signInInputsFilled && this.passwordConfirmed);
-            return anyInputIsMissing || this.signInLoading;
+            const signInInputsValid = this.usernameIsValid && this.passwordIsValid && this.selectedSymbol;
+
+            const requiredInputsValid = this.tab === SIGN_IN
+                ? signInInputsValid
+                : signInInputsValid && this.confirmedPasswordIsValid;
+
+            return !requiredInputsValid || this.loading;
         },
         usernameIsValid() {
             return this.username ? this.username.length <= 50 : null;
@@ -150,28 +161,43 @@ export default {
             return this.passwordConfirmed ? this.password === this.passwordConfirmed : null;
         }
     },
+    watch: {
+        error(newVal) {
+            if (newVal) this.$bvToast.show('auth-error-toast');
+        }
+    },
     methods: {
         ...mapActions({
-            signIn: 'playerData/signIn'
+            signIn: 'playerData/signIn',
+            signUp: 'playerData/signUp',
+            logOut: 'playerData/logOut'
         }),
-        logOut() {
+        async authenticateUser() {
+            this.$bvToast.hide('auth-error-toast');
 
-        },
-        authenticateUser() {
             if (this.tab === SIGN_IN) {
-                this.signIn({
+                await this.signIn({
                     "PlayerName": this.username,
                     "Ward": this.password,
                     "Symbol": this.selectedSymbol
                 });
             }
-            else this.signUp({
-                "PlayerName": this.username,
-                "Ward": this.password,
-                "Wardcheck": this.passwordConfirmed,
-                "Symbol": this.selectedSymbol
-            });
+            else {
+                await this.signUp({
+                    "PlayerName": this.username,
+                    "Ward": this.password,
+                    "Wardcheck": this.passwordConfirmed,
+                    "Symbol": this.selectedSymbol
+                });
+            }
+            if (this.isSignedIn) this.resetForm();
         },
+        resetForm() {
+            this.selectedSymbol = null;
+            this.username = null;
+            this.password = null;
+            this.passwordConfirmed = null;
+        }
     }
 }
 </script>
