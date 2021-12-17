@@ -13,6 +13,6 @@ Vue.config.productionTip = false;
 new Vue({
   store,
   router,
-  beforeCreate() { this.$store.commit('playerData/initializeFromStorage') },
+  beforeCreate() { this.$store.dispatch('playerData/initializeFromStorage') },
   render: h => h(App),
 }).$mount('#app')

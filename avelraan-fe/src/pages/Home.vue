@@ -19,7 +19,7 @@
             <b-col cols="12" sm="8" md="6" class="mx-auto">
                 <b-row class="mb-3">
                     <b-col cols="4" class="d-flex align-items-center">
-                        <label>Symbol</label>
+                        <label class="mb-0">Symbol</label>
                     </b-col>
                     <b-col cols="8">
                         <b-select size="sm" autofocus
@@ -38,7 +38,7 @@
                 </b-row>
                 <b-row class="mb-3">
                     <b-col cols="4" class="d-flex align-items-center">
-                        <label>Username</label>
+                        <label class="mb-0">Username</label>
                     </b-col>
                     <b-col cols="8">
                         <b-input type="text" size="sm"
@@ -54,7 +54,7 @@
                 </b-row>
                 <b-row class="mb-3">
                     <b-col cols="4" class="d-flex align-items-center">
-                        <label>PowerWard</label>
+                        <label class="mb-0">PowerWard</label>
                     </b-col>
                     <b-col cols="8">
                         <b-input type="password" size="sm"
@@ -71,7 +71,7 @@
                 </b-row>
                 <b-row class="mb-3" v-if="isSignUpTab">
                     <b-col cols="4" class="d-flex align-items-center">
-                        <label>Confirm PowerWard</label>
+                        <label class="mb-0">Confirm PowerWard</label>
                     </b-col>
                     <b-col cols="8">
                         <b-input type="password" size="sm"

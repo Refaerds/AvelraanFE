@@ -22,7 +22,7 @@ const router = new VueRouter({
                 {
                     path: '/characters',
                     name: 'Characters',
-                    // component: () => import('../pages/Home')
+                    component: () => import('../pages/Characters')
                 },
                 {
                     path: '/party',

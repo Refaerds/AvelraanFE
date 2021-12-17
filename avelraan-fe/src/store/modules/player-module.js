@@ -2,13 +2,9 @@ import { signIn, signUp } from "../../services";
 import { getErrorText } from "../../helpers";
 
 const updateStorage = (key, value) => {
+    // pushes the login data to localStorage, for persistence
     if (value) localStorage.setItem(key, value);
     else localStorage.removeItem(key);
-};
-
-const persistedParams = {
-    playerId: null,
-    playerName: null
 };
 
 export default {
@@ -19,34 +15,65 @@ export default {
         isSignedIn: false,
         loading: false,
         error: null,
-        ...persistedParams
+        playerId: null,
+        playerName: null
     },
     actions: {
-        signIn({commit}, payload) {
+        signIn({commit, dispatch}, payload) {
             commit('setLoading', true);
             commit('setError', null);
 
             return signIn(payload)
                 .then(data => {
-                    commit('setIsSignedIn', true);
-                    commit('setPlayerId', data.PlayerId);
-                    commit('setPlayerName', data.PlayerName);
+                    dispatch('setCoreData', {
+                        playerId: data.PlayerId,
+                        playerName: data.PlayerName,
+                        getCharacters: true
+                    });
                 })
                 .catch(error => commit('setError', getErrorText(error)))
                 .finally(() => commit('setLoading', false));
         },
-        signUp({commit}, payload) {
+        signUp({commit, dispatch}, payload) {
             commit('setLoading', true);
             commit('setError', null);
 
             return signUp(payload)
                 .then(data => {
-                    commit('setIsSignedIn', true);
-                    commit('setPlayerId', data.PlayerId);
-                    commit('setPlayerName', data.PlayerName);
+                    dispatch('setCoreData', {
+                        playerId: data.PlayerId,
+                        playerName: data.PlayerName
+                    });
                 })
                 .catch(error => commit('setError', getErrorText(error)))
                 .finally(() => commit('setLoading', false));
+        },
+        setCoreData({commit, dispatch}, payload) {
+            // is called on signIn, signUp, or when initializing login data from the localStorage
+            // sets the login data in the store, and initiates the call for characters list in the above cases, except signUp
+            const {playerId, playerName, getCharacters} = payload;
+            if (playerId && playerName) {
+                commit('setIsSignedIn', true);
+                commit('setPlayerId', playerId);
+                commit('setPlayerName', playerName);
+
+                if (getCharacters) {
+                    const getCharactersPayload = {
+                        PlayerId: playerId,
+                        PlayerName: playerName
+                    };
+                    dispatch('charactersData/getCharactersList', getCharactersPayload, {root: true});
+                }
+            }
+        },
+        initializeFromStorage({dispatch}) {
+            // gets the persisted login data from localStorage
+            const playerId = localStorage.getItem('playerId');
+            const playerName = localStorage.getItem('playerName');
+
+            if (playerId && playerName) {
+                dispatch('setCoreData', { playerId, playerName, getCharacters: true });
+            }
         },
         logOut({commit}) {
             commit('setIsSignedIn', false);
@@ -65,13 +92,6 @@ export default {
         setPlayerName: (state, data) => {
             state.playerName = data;
             updateStorage('playerName', data);
-        },
-        initializeFromStorage: (state) => {
-            Object.keys(persistedParams).forEach(key => {
-                const value = localStorage.getItem(key);
-                if (value) state[key] = value;
-            });
-            if (state.playerId) state.isSignedIn = true;
         }
     }
 };

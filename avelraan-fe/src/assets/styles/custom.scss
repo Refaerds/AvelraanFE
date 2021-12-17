@@ -38,18 +38,23 @@ html, body {
 // Nav
 
 a.nav-link {
-  color: $av-dim-green;
-  background-color: $white-05;
-  margin: 0 0.25rem;
-  border-radius: 5%;
+  color: $av-dim-green !important;
+  background-color: $white-05 !important;
+  margin: 0 0.25rem !important;
+  border-radius: 5% !important;
+  border: none !important;
 }
 
 a.nav-link:hover, a.nav-link.active {
-  color: $av-light-green;
-  background-color: $black-70;
+  color: $av-light-green !important;
+  background-color: $black-70 !important;
 }
 
-a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px; }
+a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px !important; }
+
+.nav-tabs {
+  border-bottom: none !important;
+}
 
 //TheNavBar
 
@@ -77,4 +82,11 @@ button[disabled] {
 
 .b-toast .toast .toast-body {
   padding-top: 0;
+}
+
+// Alerts
+.alert-danger {
+  color: $av-light-yellow;
+  background-color: $danger;
+  border-color: $danger;
 }

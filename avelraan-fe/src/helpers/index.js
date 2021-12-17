@@ -1,4 +1,4 @@
-const ERROR_NAME = {
+export const ERROR_NAME = {
     serverError: 'ServerError',
     customError: 'CustomError'
 }
@@ -44,4 +44,8 @@ export const getErrorText = (error) => {
     else {
         return 'Something went wrong, please try again later';
     }
+}
+
+export const isCustomError = (error) => {
+    return error.name === ERROR_NAME.customError;
 }
