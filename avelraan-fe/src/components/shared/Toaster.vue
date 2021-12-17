@@ -39,8 +39,7 @@ export default {
             default: 'Error'
         },
         text: {
-            type: String,
-            required: true
+            type: String
         },
         delay: {
             type: Number,

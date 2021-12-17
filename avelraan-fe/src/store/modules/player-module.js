@@ -1,6 +1,16 @@
 import { signIn, signUp } from "../../services";
 import { getErrorText } from "../../helpers";
 
+const updateStorage = (key, value) => {
+    if (value) localStorage.setItem(key, value);
+    else localStorage.removeItem(key);
+};
+
+const persistedParams = {
+    playerId: null,
+    playerName: null
+};
+
 export default {
 
     namespaced: true,
@@ -9,9 +19,7 @@ export default {
         isSignedIn: false,
         loading: false,
         error: null,
-
-        playerId: null,
-        playerName: null
+        ...persistedParams
     },
     actions: {
         signIn({commit}, payload) {
@@ -50,7 +58,20 @@ export default {
         setIsSignedIn: (state, data) => state.isSignedIn = data,
         setLoading: (state, data) => state.loading = data,
         setError: (state, data) => state.error = data,
-        setPlayerId: (state, data) => state.playerId = data,
-        setPlayerName: (state, data) => state.playerName = data,
+        setPlayerId: (state, data) => {
+            state.playerId = data;
+            updateStorage('playerId', data);
+        },
+        setPlayerName: (state, data) => {
+            state.playerName = data;
+            updateStorage('playerName', data);
+        },
+        initializeFromStorage: (state) => {
+            Object.keys(persistedParams).forEach(key => {
+                const value = localStorage.getItem(key);
+                if (value) state[key] = value;
+            });
+            if (state.playerId) state.isSignedIn = true;
+        }
     }
 };
