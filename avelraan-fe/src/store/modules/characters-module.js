@@ -12,10 +12,10 @@ export default {
     },
     getters: {
         aliveCharacters(state) {
-            return state.charactersList.filter(char => char.IsAlive);
+            return state.charactersList ? state.charactersList.filter(char => char.IsAlive) : [];
         },
         deadCharacters(state) {
-            return state.charactersList.filter(char => !char.IsAlive);
+            return state.charactersList ? state.charactersList.filter(char => !char.IsAlive) : [];
         }
     },
     actions: {
