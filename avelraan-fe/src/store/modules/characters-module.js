@@ -1,17 +1,18 @@
 import { getCharacters } from "../../services";
 import { getErrorText, isCustomError } from "../../helpers";
 
+const initialState = {
+    charactersList: null,
+    charactersListLoading: false,
+    charactersListError: null,
+    selectedCharacterId: null
+};
+
 export default {
 
     namespaced: true,
 
-    state: {
-        charactersList: null,
-        charactersListLoading: false,
-        charactersListError: null,
-
-        selectedCharacterId: null
-    },
+    state: { ...initialState },
     getters: {
         aliveCharacters(state) {
             return state.charactersList ? state.charactersList.filter(char => char.IsAlive) : [];
@@ -40,6 +41,9 @@ export default {
                     commit('setCharactersListError', errorText);
                 })
                 .finally(() => commit('setCharactersListLoading', false))
+        },
+        resetCharacterModule({state}) {
+            Object.assign(state, initialState);
         }
     },
     mutations: {

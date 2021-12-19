@@ -3,6 +3,7 @@
                 id="the-char-selector"
                 toggle-class="d-flex align-items-center text-av-light-yellow"
                 menu-class="bg-black-70 text-av-light-green"
+                :disabled="!aliveCharacters.length"
     >
         <template #button-content>
             <div v-if="selectedCharacterId">
@@ -12,7 +13,7 @@
                 <span class="tcs-selection">{{ selectedCharacter.Name }}</span>
             </div>
             <div v-else>
-                <b-avatar size="sm" class="shadow-none mr-1 bg-black-30">
+                <b-avatar size="sm" class="shadow-none mr-1 bg-black-70">
                     <template #default>
                         <anonymous-icon class="fill-av-light-green"></anonymous-icon>
                     </template>

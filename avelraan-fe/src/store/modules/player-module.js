@@ -75,10 +75,11 @@ export default {
                 dispatch('setCoreData', { playerId, playerName, getCharacters: true });
             }
         },
-        logOut({commit}) {
+        logOut({commit, dispatch}) {
             commit('setIsSignedIn', false);
             commit('setPlayerId', null);
             commit('setPlayerName', null);
+            dispatch('charactersData/resetCharacterModule', null, {root: true});
         }
     },
     mutations: {
