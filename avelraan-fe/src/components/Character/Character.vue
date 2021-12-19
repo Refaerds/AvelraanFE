@@ -2,14 +2,12 @@
     <div class="m-3 d-flex flex-column align-items-center max-w-7">
         <div class="d-flex flex-row flex-nowrap">
             <div :id="avatarId">
-<!--                    TODO: add router link-->
                 <b-avatar size="lg" rounded="lg"
                           badge-variant="danger" badge-offset="-0.4rem"
                           :disabled="!char.IsAlive"
-                          to="/"
-                          @click="onCharacterClick"
+                          to="/characters/model"
+                          @click="setSelectedCharacterId(char.CharacterId)"
                           :src="getImgUrl(char.Logbook.PortraitNr)"
-
                 >
                     <template v-if="char.InFight" #badge>
                         <fight-icon class="av-icon"
@@ -28,13 +26,14 @@
                 This warrior has met his glorious end
             </b-tooltip>
 
-            <div class="d-flex flex-column pl-2">
-<!--                    TODO: add router link-->
 <!--                Level up button-->
+            <div class="d-flex flex-column pl-2">
+                <!--                    TODO: add router link-->
                 <b-link v-if="char.IsAlive && char.HasLevelup"
                         @mouseenter="hoverClass = 'av-icon-animated'"
                         @mouseleave="hoverClass = ''"
-                        to="/"
+                        @click="setSelectedCharacterId(char.CharacterId)"
+                        to="/characters/levelup"
                 >
                     <upgrade-icon :class="['av-icon', hoverClass]" ></upgrade-icon>
                 </b-link>
@@ -47,6 +46,7 @@
 <script>
 import UpgradeIcon from '../../assets/images/icons/upgrade.svg';
 import FightIcon from '../../assets/images/icons/fight.svg';
+import { mapMutations } from "vuex";
 
 export default {
     name: "Character",
@@ -68,11 +68,11 @@ export default {
         }
     },
     methods: {
+        ...mapMutations({
+            setSelectedCharacterId: 'charactersData/setSelectedCharacterId'
+        }),
         getImgUrl(nr) {
             return require('../../assets/images/humans/human'+ nr + '.png')
-        },
-        onCharacterClick() {
-            //TODO
         }
     }
 }

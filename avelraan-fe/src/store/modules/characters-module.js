@@ -8,7 +8,9 @@ export default {
     state: {
         charactersList: null,
         charactersListLoading: false,
-        charactersListError: null
+        charactersListError: null,
+
+        selectedCharacterId: null
     },
     getters: {
         aliveCharacters(state) {
@@ -38,6 +40,7 @@ export default {
     mutations: {
         setCharactersList: (state, data) => state.charactersList = data,
         setCharactersListError: (state, data) => state.charactersListError = data,
-        setCharactersListLoading: (state, data) => state.charactersListLoading = data
+        setCharactersListLoading: (state, data) => state.charactersListLoading = data,
+        setSelectedCharacterId: (state, data) => state.selectedCharacterId = data,
     }
 };
