@@ -1,7 +1,8 @@
 <template>
-    <div class="m-3 d-flex flex-column align-items-center max-w-7">
-        <div class="d-flex flex-row flex-nowrap">
-            <div :id="avatarId">
+    <div class="max-w-7">
+        <div :id="avatarId" class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-nowrap">
+<!--                Avatar-->
                 <b-avatar size="lg" rounded="lg"
                           badge-variant="danger" badge-offset="-0.4rem"
                           :disabled="!char.IsAlive"
@@ -18,28 +19,27 @@
                         </b-tooltip>
                     </template>
                 </b-avatar>
-                <div class="text-center mt-2 text-break">{{ char.Name }}</div>
+<!--                Level up icon-->
+                <div v-if="hasLevelUp" class="d-flex flex-column pl-2">
+                    <b-link @mouseenter="hoverClass = 'av-icon-animated'"
+                            @mouseleave="hoverClass = ''"
+                            @click.native="setSelectedCharacterId(char.CharacterId)"
+                            to="/characters/levelup"
+                    >
+                        <upgrade-icon :class="['av-icon', 'fill-av-light-yellow', hoverClass]" ></upgrade-icon>
+                    </b-link>
+                </div>
             </div>
-
-<!--            Dead tooltip-->
-            <b-tooltip v-if="!char.IsAlive" :target="avatarId">
-                This warrior has met his glorious end
-            </b-tooltip>
-
-<!--                Level up button-->
-            <div class="d-flex flex-column pl-2">
-                <!--                    TODO: add router link-->
-                <b-link v-if="char.IsAlive && char.HasLevelup"
-                        @mouseenter="hoverClass = 'av-icon-animated'"
-                        @mouseleave="hoverClass = ''"
-                        @click.native="setSelectedCharacterId(char.CharacterId)"
-                        to="/characters/levelup"
-                >
-                    <upgrade-icon :class="['av-icon', 'fill-av-light-yellow', hoverClass]" ></upgrade-icon>
-                </b-link>
+<!--            Char name-->
+            <div v-if="showName" :class="['text-center mt-2 text-break', hasLevelUp ? 'pr-3' : '']">
+                {{ char.Name }}
             </div>
         </div>
 
+<!--            Dead tooltip-->
+        <b-tooltip v-if="!char.IsAlive" :target="avatarId">
+            This warrior has met his glorious end
+        </b-tooltip>
     </div>
 </template>
 
@@ -55,6 +55,10 @@ export default {
         char: {
             type: Object,
             required: true
+        },
+        showName: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -65,6 +69,9 @@ export default {
     computed: {
         avatarId() {
             return 'character-avatar-' + this.char.CharacterId;
+        },
+        hasLevelUp() {
+            return this.char.IsAlive && this.char.HasLevelup;
         }
     },
     methods: {

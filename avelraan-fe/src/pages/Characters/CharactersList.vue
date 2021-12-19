@@ -9,6 +9,7 @@
         <character v-for="char in charListSorted"
                    :key="char.CharacterId"
                    :char="char"
+                   class="m-3"
         ></character>
     </div>
 </div>
