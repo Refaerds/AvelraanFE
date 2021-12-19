@@ -6,7 +6,7 @@
                           badge-variant="danger" badge-offset="-0.4rem"
                           :disabled="!char.IsAlive"
                           to="/characters/model"
-                          @click="setSelectedCharacterId(char.CharacterId)"
+                          @click.native="setSelectedCharacterId(char.CharacterId)"
                           :src="getImgUrl(char.Logbook.PortraitNr)"
                 >
                     <template v-if="char.InFight" #badge>
@@ -32,10 +32,10 @@
                 <b-link v-if="char.IsAlive && char.HasLevelup"
                         @mouseenter="hoverClass = 'av-icon-animated'"
                         @mouseleave="hoverClass = ''"
-                        @click="setSelectedCharacterId(char.CharacterId)"
+                        @click.native="setSelectedCharacterId(char.CharacterId)"
                         to="/characters/levelup"
                 >
-                    <upgrade-icon :class="['av-icon', hoverClass]" ></upgrade-icon>
+                    <upgrade-icon :class="['av-icon', 'fill-av-light-yellow', hoverClass]" ></upgrade-icon>
                 </b-link>
             </div>
         </div>

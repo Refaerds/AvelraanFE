@@ -1,0 +1,57 @@
+@import "variables";
+
+// Anchor, variant link
+
+a, a:hover, a:active,
+.btn-link, .btn-link:hover, .btn-link:active {
+  text-decoration: none !important;
+  color: unset !important;
+}
+
+// Nav
+
+a.nav-link {
+  color: $av-dim-green !important;
+  background-color: $white-05 !important;
+  margin: 0 0.25rem !important;
+  border-radius: 5% !important;
+  border: none !important;
+}
+
+a.nav-link:hover, a.nav-link.active {
+  color: $av-light-green !important;
+  background-color: $black-70 !important;
+}
+
+a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px !important; }
+
+.nav-tabs { border-bottom: none !important; }
+
+//TheNavBar
+
+#the_nav_bar a.nav-link { background-color: $black-30; }
+
+// Tooltip
+.tooltip { font-family: 'Tenali Ramakrishna', sans-serif; }
+
+// Toaster
+.b-toast-danger .toast, .b-toast-danger .toast .toast-header {
+  background-color: $danger;
+  border-color: $danger;
+  opacity: 0.8;
+  color: $av-light-yellow;
+}
+
+.b-toast .toast .toast-body { padding-top: 0; }
+
+// Alerts
+
+.alert-danger {
+  color: $av-light-yellow;
+  background-color: $danger;
+  border-color: $danger;
+}
+
+// Avatar
+
+.b-avatar { box-shadow: $av-shadow-green 0px 0px 6px 4px; }

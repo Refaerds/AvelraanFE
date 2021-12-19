@@ -1,0 +1,71 @@
+@import "variables";
+
+@media (min-width: 576px) {
+  html { font-size: 20px; }
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Tenali Ramakrishna', sans-serif;
+  color: $av-light-yellow;
+  line-height: 1.25rem;
+}
+
+.bg-black-70 { background-color: $black-70; }
+.bg-black-30 { background-color: $black-30; }
+.text-white-50 { color: $white-50; }
+.text-av-light-yellow { color: $av-light-yellow; }
+.fill-av-light-yellow { fill: $av-light-yellow; }
+.text-av-light-green { color: $av-light-green; }
+.fill-av-light-green { fill: $av-light-green; }
+
+
+// Button
+button[disabled] { cursor: not-allowed; }
+
+// Links
+a.disabled { pointer-events: none; }
+
+// SVG icons
+.av-icon { width: 0.8rem; }
+.av-icon.av-icon-animated {
+  animation-name: jump;
+  animation-duration: 0.3s;
+}
+
+@keyframes jump {
+  0% {transform: translate(0)}
+  50% {transform: translateY(-0.3rem)}
+  100% {transform: translateY(0px)}
+}
+
+.disabled .av-icon { fill-opacity: 0.5; }
+
+// The Character Selector
+#the-char-selector {
+  .tcs-no-selection {
+    color: $av-light-green;
+    text-shadow: 0 0 5px black;
+
+    &:hover {
+      text-shadow: 0 0 2px $av-dim-green;
+    }
+  }
+
+  .tcs-selection {
+    color: $av-light-yellow;
+    text-shadow: 0 0 5px black;
+
+    &:hover {
+      text-shadow: 0 0 1px $av-light-yellow;
+    }
+  }
+
+  .dropdown-menu {
+    backdrop-filter: blur(1px);
+  }
+
+  .dropdown-item:hover {
+    background-color: black;
+  }
+}

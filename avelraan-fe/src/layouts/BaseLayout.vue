@@ -4,7 +4,11 @@
     <the-nav-bar></the-nav-bar>
 
     <b-container class="h-75" style="min-height: 500px;">
-        <h4 class="text-av-light-yellow mt-n4">{{ pageName }}</h4>
+        <div class="d-flex justify-content-between align-items-center mt-n4">
+            <h4 class="text-av-light-yellow mb-0 py-1">{{ pageName }}</h4>
+            <the-character-selector v-if="pageName !== 'Home'"></the-character-selector>
+        </div>
+
         <div class="bg-black-70 rounded-lg p-3 p-lg-4 overflow-auto h-100">
             <router-view></router-view>
         </div>
@@ -19,10 +23,11 @@
 
 <script>
 import TheNavBar from "../components/NavBar/TheNavBar";
+import TheCharacterSelector from "../components/TheCharacterSelector/TheCharacterSelector";
 
 export default {
     name: "BaseLayout",
-    components: { TheNavBar },
+    components: { TheNavBar, TheCharacterSelector },
     computed: {
         pageName() {
             return this.$route.matched[1].name;

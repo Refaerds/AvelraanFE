@@ -1,8 +1,12 @@
 <template>
-<b-tabs content-class="mt-3" align="right">
+<b-tabs content-class="mt-3"
+        nav-wrapper-class="d-flex justify-content-center justify-content-md-end"
+        align="center"
+>
     <b-tab
         v-for="(tab,index) in tabs"
         :key="'tab-' + index"
+        title-item-class="mb-1"
         @click="$router.push(computeUrl(tab.name)).catch(()=>{})"
         :active="isTabActive(tab.name)"
         :title="tab.name"

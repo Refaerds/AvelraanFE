@@ -18,6 +18,11 @@ export default {
         },
         deadCharacters(state) {
             return state.charactersList ? state.charactersList.filter(char => !char.IsAlive) : [];
+        },
+        selectedCharacter(state) {
+            return state.selectedCharacterId
+                ? state.charactersList?.find(char => char.CharacterId === state.selectedCharacterId)
+                : null;
         }
     },
     actions: {
