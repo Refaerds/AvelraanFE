@@ -5,29 +5,26 @@
         <b-spinner></b-spinner>
     </div>
     <div v-else>
-        <b-tabs content-class="mt-3" align="right">
-            <b-tab title="Characters" active>
-                <characters-list></characters-list>
-            </b-tab>
-            <b-tab title="Create"></b-tab>
-            <b-tab title="Level Up" disabled></b-tab>
-        </b-tabs>
+        <tabs :tabs="tabs"></tabs>
     </div>
 </div>
 </template>
 
 <script>
 import {mapState} from "vuex";
-import CharactersList from "./Characters/CharactersList";
+import Tabs from "../components/shared/Tabs";
 
 export default {
     name: "Characters",
-    components: {CharactersList},
+    components: { Tabs },
     computed: {
         ...mapState({
             charactersListLoading: state => state.charactersData.charactersListLoading,
             charactersListError: state => state.charactersData.charactersListError,
-        })
+        }),
+        tabs() {
+            return this.$router.options.routes[0].children.find(route => route.name === this.$route.matched[1].name).children;
+        }
     }
 }
 </script>

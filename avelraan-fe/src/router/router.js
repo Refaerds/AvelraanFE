@@ -21,8 +21,31 @@ const router = new VueRouter({
                 },
                 {
                     path: '/characters',
+                    redirect: '/characters/list',
                     name: 'Characters',
-                    component: () => import('../pages/Characters')
+                    component: () => import('../pages/Characters'),
+                    children: [
+                        {
+                            path: '/characters/list',
+                            name: 'My Characters',
+                            component: () => import('../pages/Characters/CharactersList')
+                        },
+                        {
+                            path: '/characters/model',
+                            name: 'Model',
+                            component: () => import('../pages/Characters/CharacterModel')
+                        },
+                        {
+                            path: '/characters/levelup',
+                            name: 'Level Up',
+                            component: () => import('../pages/Characters/CharacterLevelUp')
+                        },
+                        {
+                            path: '/characters/create',
+                            name: 'Create',
+                            component: () => import('../pages/Characters/CharacterCreate')
+                        },
+                    ]
                 },
                 {
                     path: '/party',

@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         isNavItemActive(name) {
-            return name === this.$route.name;
+            return name === this.$route.matched[1].name;
         }
     }
 }

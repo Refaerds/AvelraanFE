@@ -25,7 +25,7 @@ export default {
     components: { TheNavBar },
     computed: {
         pageName() {
-            return this.$route.name;
+            return this.$route.matched[1].name;
         }
     }
 }
