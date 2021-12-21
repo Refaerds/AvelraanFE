@@ -109,13 +109,6 @@ export default {
         }
     },
     methods: {
-        getHalfList(obj, getFirstHalf) {
-            const list = Object.entries(obj);
-            const length = list.length;
-            const middleIndex = Math.ceil(length / 2);
-
-            return getFirstHalf ? list.slice(0, middleIndex) : list.slice(middleIndex);
-        },
         getPartialList(obj, numberOfParts, partNumber) {
             const list = Object.entries(obj);
             const length = list.length;
