@@ -55,3 +55,9 @@ a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px !important; }
 // Avatar
 
 .b-avatar { box-shadow: $av-shadow-green 0px 0px 6px 4px; }
+
+// Badge
+.badge-warning {
+  box-shadow: 2px 2px 5px goldenrod inset;
+  min-width: 1.1rem;
+}

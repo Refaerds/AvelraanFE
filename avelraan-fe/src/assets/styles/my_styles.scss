@@ -51,19 +51,19 @@ a.disabled { pointer-events: none; }
 #the-char-selector {
   .tcs-no-selection {
     color: $av-light-green;
-    text-shadow: 0 0 5px black;
+    text-shadow: 0px 0px 2px black, 0px 0px 3px black, 0px 0px 4px black;
 
     &:hover {
-      text-shadow: 0 0 2px $av-dim-green;
+      text-shadow: 0px 0px 2px black, 0px 0px 3px $av-dim-green, 0px 0px 4px black;
     }
   }
 
   .tcs-selection {
     color: $av-light-yellow;
-    text-shadow: 0 0 5px black;
+    text-shadow: 0px 0px 2px black, 0px 0px 3px black, 0px 0px 4px black;
 
     &:hover {
-      text-shadow: 0 0 1px $av-light-yellow;
+      text-shadow: 0px 0px 2px black, 0px 0px 3px $av-light-yellow, 0px 0px 4px black;
     }
   }
 
@@ -84,6 +84,7 @@ a.disabled { pointer-events: none; }
 
   .info-header {
     margin-top: -1.5rem;
+    padding-bottom: 0.25rem;
     text-align: center;
 
     .info-header-text {
