@@ -19,22 +19,13 @@
                     <div class="info-header">
                         <div class="info-header-text">Stats</div>
                     </div>
-                    <b-row>
-                        <b-col>
-                            <character-stat v-for="[key, value] in getPartialList(stats, 2, 0)"
-                                            :key="key"
-                                            :label="key"
-                                            :value="value"
-                            ></character-stat>
-                        </b-col>
-                        <b-col>
-                            <character-stat v-for="[key, value] in getPartialList(stats, 2, 1)"
-                                            :key="key"
-                                            :label="key"
-                                            :value="value"
-                            ></character-stat>
-                        </b-col>
-                    </b-row>
+                    <div class="av-columns-2">
+                        <character-stat v-for="[key, value] in Object.entries(stats)"
+                                        :key="key"
+                                        :label="key"
+                                        :value="value"
+                        ></character-stat>
+                    </div>
                 </div>
             </b-col>
             <b-col cols="12" md="6" class="mb-3">
@@ -42,30 +33,13 @@
                     <div class="info-header">
                         <div class="info-header-text">Skills</div>
                     </div>
-                    <b-row>
-                        <b-col>
-                            <character-stat v-for="[key, value] in getPartialList(selectedCharacter.Skills, 3, 0)"
-                                            :key="key"
-                                            :label="key"
-                                            :value="value"
-                            ></character-stat>
-                        </b-col>
-                        <b-col>
-                            <character-stat v-for="[key, value] in getPartialList(selectedCharacter.Skills, 3, 1)"
-                                            :key="key"
-                                            :label="key"
-                                            :value="value"
-                            ></character-stat>
-                        </b-col>
-                        <b-col>
-                            <character-stat v-for="[key, value] in getPartialList(selectedCharacter.Skills, 3, 2)"
-                                            :key="key"
-                                            :label="key"
-                                            :value="value"
-                            ></character-stat>
-                        </b-col>
-                    </b-row>
-
+                    <div class="av-columns-3">
+                        <character-stat v-for="[key, value] in Object.entries(selectedCharacter.Skills)"
+                                        :key="key"
+                                        :label="key"
+                                        :value="value"
+                        ></character-stat>
+                    </div>
                 </div>
             </b-col>
         </b-row>
@@ -107,26 +81,22 @@ export default {
             }
             return {};
         }
-    },
-    methods: {
-        getPartialList(obj, numberOfParts, partNumber) {
-            const list = Object.entries(obj);
-            const length = list.length;
-
-            let finalList = [];
-
-            for (let i = 0; i < numberOfParts; i++) {
-                let start = !i ? 0 : Math.ceil(length / numberOfParts * partNumber);
-                let end = Math.ceil(length / numberOfParts * (partNumber + 1));
-                finalList.push(list.slice(start, end));
-            }
-
-            return finalList[partNumber];
-        }
     }
 }
 </script>
 
 <style scoped>
+.av-columns-3 {
+    columns: 3;
+}
 
+.av-columns-2 {
+    columns: 2;
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px), (max-width: 450px) {
+    .av-columns-3 {
+        columns: 2;
+    }
+}
 </style>
