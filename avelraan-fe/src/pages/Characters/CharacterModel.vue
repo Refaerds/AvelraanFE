@@ -13,9 +13,10 @@
             </div>
         </div>
 
+<!--        Stats & Skills-->
         <b-row class="pt-3">
             <b-col cols="12" md="6" class="mb-3">
-                <div class="info-section">
+                <div class="info-section h-100">
                     <div class="info-header">
                         <div class="info-header-text">Stats</div>
                     </div>
@@ -29,7 +30,7 @@
                 </div>
             </b-col>
             <b-col cols="12" md="6" class="mb-3">
-                <div class="info-section">
+                <div class="info-section h-100">
                     <div class="info-header">
                         <div class="info-header-text">Skills</div>
                     </div>
@@ -43,6 +44,35 @@
                 </div>
             </b-col>
         </b-row>
+
+<!--        Inventory-->
+        <b-row>
+            <b-col cols="12" md="6" class="mb-3">
+                <div class="info-section h-100">
+                    <div class="info-header">
+                        <div class="info-header-text">Inventory</div>
+                    </div>
+                    <div></div>
+                </div>
+            </b-col>
+
+            <b-col cols="12" md="6" class="mb-3">
+                <div class="info-section h-100">
+                    <div class="info-header">
+                        <div class="info-header-text">Supplies</div>
+                    </div>
+                    <div>
+                        <character-item v-for="item in selectedCharacter.Supplies"
+                                        :key="item.Id"
+                                        :item="item"
+                        ></character-item>
+                    </div>
+                </div>
+            </b-col>
+        </b-row>
+
+
+
     </div>
 </div>
 </template>
@@ -51,10 +81,11 @@
 import {mapGetters, mapState} from "vuex";
 import Character from "../../components/Character/Character";
 import CharacterStat from "../../components/Character/CharacterStat";
+import CharacterItem from "../../components/Character/CharacterItem";
 
 export default {
     name: "CharacterModel",
-    components: { Character, CharacterStat },
+    components: { Character, CharacterStat, CharacterItem },
     computed: {
         ...mapState({
             selectedCharacterId: (state) => state.charactersData.selectedCharacterId,
