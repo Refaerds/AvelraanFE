@@ -1,6 +1,6 @@
 import { throwCustomError, throwServerError } from "../helpers";
 
-const baseUrl = 'https://avelraangame.azurewebsites.net/api/palantir/';
+const baseUrl = 'https://calm-caverns-53586.herokuapp.com/https://avelraangame.azurewebsites.net/api/palantir/';
 const headers = new Headers({
     "Content-Type": "application/json"
 });

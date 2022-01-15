@@ -2,7 +2,7 @@
 <div>
     <div class="text-center mt-3" v-if="charactersListLoading"><b-spinner></b-spinner></div>
     <b-alert v-else-if="charactersListError" variant="danger" show>{{ charactersListError }}</b-alert>
-    <p v-if="!aliveCharacters.length" class="text-center pt-3">You don't have any alive characters to view</p>
+    <p v-else-if="!aliveCharacters.length" class="text-center pt-3">You don't have any alive characters to view</p>
     <p v-else-if="!selectedCharacterId" class="text-center pt-3">Please select a character</p>
 
     <div v-else>
