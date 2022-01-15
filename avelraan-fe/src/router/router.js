@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 
 import BaseLayout from "../layouts/BaseLayout";
 
+import { PAGES } from "../helpers";
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -16,55 +18,55 @@ const router = new VueRouter({
             children: [
                 {
                     path: '/home',
-                    name: 'Home',
+                    name: PAGES.home.index,
                     component: () => import('../pages/Home')
                 },
                 {
                     path: '/characters',
                     redirect: '/characters/list',
-                    name: 'Characters',
+                    name: PAGES.characters.index,
                     component: () => import('../pages/Characters'),
                     children: [
                         {
                             path: '/characters/list',
-                            name: 'My Characters',
+                            name: PAGES.characters.myCharacters,
                             component: () => import('../pages/Characters/CharactersList')
                         },
                         {
                             path: '/characters/model',
-                            name: 'Model',
+                            name: PAGES.characters.model,
                             component: () => import('../pages/Characters/CharacterModel')
                         },
                         {
                             path: '/characters/levelup',
-                            name: 'Level Up',
+                            name: PAGES.characters.levelUp,
                             component: () => import('../pages/Characters/CharacterLevelUp')
                         },
                         {
                             path: '/characters/create',
-                            name: 'Create',
+                            name: PAGES.characters.create,
                             component: () => import('../pages/Characters/CharacterCreate')
                         },
                     ]
                 },
                 {
                     path: '/party',
-                    name: 'Party',
+                    name: PAGES.party.index,
                     // component: () => import('../pages/Home')
                 },
                 {
                     path: '/items',
-                    name: 'Items',
+                    name: PAGES.items.index,
                     // component: () => import('../pages/Home')
                 },
                 {
                     path: '/merchant',
-                    name: 'Merchant',
+                    name: PAGES.merchant.index,
                     // component: () => import('../pages/Home')
                 },
                 {
                     path: '/fame',
-                    name: 'Fame',
+                    name: PAGES.fame.index,
                     // component: () => import('../pages/Home')
                 }
             ]

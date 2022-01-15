@@ -57,13 +57,7 @@ export default {
                 commit('setPlayerId', playerId);
                 commit('setPlayerName', playerName);
 
-                if (getCharacters) {
-                    const getCharactersPayload = {
-                        PlayerId: playerId,
-                        PlayerName: playerName
-                    };
-                    dispatch('charactersData/getCharactersList', getCharactersPayload, {root: true});
-                }
+                if (getCharacters) dispatch('charactersData/getCharactersList', null, {root: true});
             }
         },
         initializeFromStorage({dispatch}) {

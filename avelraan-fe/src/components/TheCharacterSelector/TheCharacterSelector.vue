@@ -6,7 +6,7 @@
                 :disabled="!aliveCharacters.length"
     >
         <template #button-content>
-            <div v-if="selectedCharacterId">
+            <div v-if="selectedCharacter">
                 <b-avatar size="sm" class="shadow-none mr-2"
                           :src="getImgUrl(selectedCharacter.Logbook.PortraitNr)"
                 ></b-avatar>

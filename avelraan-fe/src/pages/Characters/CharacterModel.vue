@@ -1,7 +1,10 @@
 <template>
 <div>
+    <div class="text-center mt-3" v-if="charactersListLoading"><b-spinner></b-spinner></div>
+    <b-alert v-else-if="charactersListError" variant="danger" show>{{ charactersListError }}</b-alert>
     <p v-if="!aliveCharacters.length" class="text-center pt-3">You don't have any alive characters to view</p>
     <p v-else-if="!selectedCharacterId" class="text-center pt-3">Please select a character</p>
+
     <div v-else>
 <!--        Avatar & basic info-->
         <div class="d-flex">
@@ -71,8 +74,6 @@
             </b-col>
         </b-row>
 
-
-
     </div>
 </div>
 </template>
@@ -88,7 +89,9 @@ export default {
     components: { Character, CharacterStat, CharacterItem },
     computed: {
         ...mapState({
-            selectedCharacterId: (state) => state.charactersData.selectedCharacterId,
+            selectedCharacterId: state => state.charactersData.selectedCharacterId,
+            charactersListLoading: state => state.charactersData.charactersListLoading,
+            charactersListError: state => state.charactersData.charactersListError
         }),
         ...mapGetters({
             aliveCharacters: 'charactersData/aliveCharacters',

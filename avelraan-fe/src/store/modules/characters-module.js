@@ -2,7 +2,7 @@ import { getCharacters } from "../../services";
 import { getErrorText, isCustomError } from "../../helpers";
 
 const initialState = {
-    charactersList: null,
+    charactersList: [],
     charactersListLoading: false,
     charactersListError: null,
     selectedCharacterId: null
@@ -27,12 +27,15 @@ export default {
         }
     },
     actions: {
-        getCharactersList({commit}, payload) {
+        getCharactersList({commit, rootState}) {
             commit('setCharactersListLoading', true);
             commit('setCharactersList', null);
             commit('setCharactersListError', null);
 
-            getCharacters(payload)
+            return getCharacters({
+                PlayerId: rootState.playerData.playerId,
+                PlayerName: rootState.playerData.playerName
+            })
                 .then(data => commit('setCharactersList', data))
                 .catch(error => {
                     const errorText = isCustomError(error)

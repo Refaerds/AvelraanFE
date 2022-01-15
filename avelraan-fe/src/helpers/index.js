@@ -3,6 +3,31 @@ export const ERROR_NAME = {
     customError: 'CustomError'
 }
 
+export const PAGES = {
+    home: {
+        index: 'Home'
+    },
+    characters: {
+        index: 'Characters',
+        myCharacters: 'My Characters',
+        model: 'Model',
+        levelUp: 'Level Up',
+        create: 'Create'
+    },
+    party: {
+        index: 'Party'
+    },
+    items: {
+        index: 'Items'
+    },
+    merchant: {
+        index: 'Merchant'
+    },
+    fame: {
+        index: 'Fame'
+    }
+};
+
 export const throwServerError = (status) => {
     throw { name: ERROR_NAME.serverError, status }
 }
