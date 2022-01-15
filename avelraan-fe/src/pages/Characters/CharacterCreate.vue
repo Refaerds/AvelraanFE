@@ -147,6 +147,8 @@ export default {
             })
             .then(() => (this.getCharactersList()))
             .then(() => {
+                // if character is found in the updated list, redirect to char Model.
+                // if not found or multiple chars with the same name found, redirect to char List.
                 const newCharacter = this.charactersList?.filter(char => char.Name.toLowerCase() === this.name.toLowerCase());
 
                 if (newCharacter.length === 1) {
