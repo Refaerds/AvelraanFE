@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="h-100">
     <tabs :tabs="tabs"></tabs>
 </div>
 </template>

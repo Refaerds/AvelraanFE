@@ -1,15 +1,15 @@
 <template>
-<b-tabs content-class="mt-3"
+<b-tabs content-class="overflow-auto pt-3"
+        class="h-100 d-flex flex-column"
         nav-wrapper-class="d-flex justify-content-center justify-content-md-end"
         align="center"
 >
-    <b-tab
-        v-for="(tab,index) in tabs"
-        :key="'tab-' + index"
-        title-item-class="mb-1"
-        @click="$router.push(computeUrl(tab.name)).catch(()=>{})"
-        :active="isTabActive(tab.name)"
-        :title="tab.name"
+    <b-tab v-for="(tab,index) in tabs"
+           :key="'tab-' + index"
+           title-item-class="mt-1"
+           @click="$router.push(computeUrl(tab.name)).catch(()=>{})"
+           :active="isTabActive(tab.name)"
+           :title="tab.name"
     ></b-tab>
 
     <router-view/>
