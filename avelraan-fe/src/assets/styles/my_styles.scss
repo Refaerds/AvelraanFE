@@ -97,3 +97,21 @@ a.disabled { pointer-events: none; }
     }
   }
 }
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $black-70;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $av-shadow-green;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $av-dim-green;
+}
