@@ -1,7 +1,7 @@
 <template>
-    <div class="max-w-7">
+    <div style="width: 6rem">
         <div :id="avatarId" class="d-flex flex-column align-items-center">
-            <div class="d-flex flex-nowrap">
+            <div class="d-flex flex-nowrap position-relative">
 <!--                Avatar-->
                 <b-avatar size="lg" rounded="lg"
                           badge-variant="danger" badge-offset="-0.4rem"
@@ -20,7 +20,7 @@
                     </template>
                 </b-avatar>
 <!--                Level up icon-->
-                <div v-if="hasLevelUp" class="d-flex flex-column pl-2">
+                <div v-if="hasLevelUp" class="position-absolute top-0 left-100 d-flex flex-column pl-1">
                     <b-link @mouseenter="hoverClass = 'av-icon-animated'"
                             @mouseleave="hoverClass = ''"
                             @click.native="setSelectedCharacterId(char.CharacterId)"
@@ -31,7 +31,7 @@
                 </div>
             </div>
 <!--            Char name-->
-            <div v-if="showName" :class="['text-center mt-2 text-break', hasLevelUp ? 'pr-3' : '']">
+            <div v-if="showName" class="text-center mt-2 text-break">
                 {{ char.Name }}
             </div>
         </div>
@@ -85,8 +85,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.max-w-7 {
-    max-width: 7rem;
-}
-</style>
+<style scoped></style>

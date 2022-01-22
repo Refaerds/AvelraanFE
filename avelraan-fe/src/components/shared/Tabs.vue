@@ -7,6 +7,8 @@
     <b-tab v-for="(tab,index) in tabs"
            :key="'tab-' + index"
            title-item-class="mt-1"
+           title-link-class="px-2 py-1 px-sm-3 py-sm-2"
+           class="p"
            @click="$router.push(computeUrl(tab.name)).catch(()=>{})"
            :active="isTabActive(tab.name)"
            :title="tab.name"
