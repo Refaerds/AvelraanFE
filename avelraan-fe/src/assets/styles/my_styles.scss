@@ -42,6 +42,10 @@ a.disabled { pointer-events: none; }
   animation-name: jump;
   animation-duration: 0.3s;
 }
+.menu-icon {
+  width: 1.5rem;
+  fill: $av-light-yellow;
+}
 
 @keyframes jump {
   0% {transform: translate(0)}
