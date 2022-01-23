@@ -121,3 +121,21 @@ export const createCharacter = (payload) => {
             else return data.Data;
         })
 };
+
+export const equipItem = (payload) => {
+    return fetch(baseUrl + 'EquipItem', {
+        headers,
+        method: 'POST',
+        body: JSON.stringify({
+            message: JSON.stringify(payload)
+        })
+    })
+        .then(response => {
+            if (response.ok) return response.json();
+            else throwServerError(response.status);
+        })
+        .then(data => {
+            if (data['Error']) throwCustomError(data['Error']);
+            else return JSON.parse(data.Data);
+        })
+};

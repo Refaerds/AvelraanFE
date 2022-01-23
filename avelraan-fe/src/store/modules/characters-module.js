@@ -47,6 +47,14 @@ export default {
         },
         resetCharacterModule({state}) {
             Object.assign(state, initialState);
+        },
+        updateCharacterData({commit, state}, charData) {
+            const indexOfChar = state.charactersList?.findIndex(char => char.CharacterId === charData.CharacterId);
+            if (indexOfChar >= 0) {
+                const updatedList = [...state.charactersList];
+                updatedList.splice(indexOfChar, 1, charData)
+                commit('setCharactersList', updatedList);
+            }
         }
     },
     mutations: {

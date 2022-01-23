@@ -31,8 +31,15 @@ a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px !important; }
 
 #the_nav_bar a.nav-link { background-color: $black-30; }
 
-// Tooltip
-.tooltip { font-family: 'Tenali Ramakrishna', sans-serif; }
+// Tooltip & popover
+.tooltip, .popover { font-family: 'Tenali Ramakrishna', sans-serif; }
+.popover {
+  background-color: $av-light-yellow;
+
+  .arrow:after {
+    border-right-color: $av-light-yellow;
+  }
+}
 
 // Toaster
 .b-toast-danger .toast, .b-toast-danger .toast .toast-header {
@@ -67,4 +74,10 @@ a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px !important; }
 
 .badge {
   min-width: 1.1rem;
+}
+
+// Dropdown
+.dropdown-menu {
+  max-height: 95vh;
+  overflow: auto;
 }
