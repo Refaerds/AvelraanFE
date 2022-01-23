@@ -44,6 +44,10 @@ a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px !important; }
 
 .b-toast .toast .toast-body { padding-top: 0; }
 
+.toast-header button {
+  font-family: -apple-system;
+}
+
 // Alerts
 
 .alert-danger {

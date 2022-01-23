@@ -71,7 +71,7 @@
 
 <script>
 import { rollDice, createCharacter, storeRoll } from "../../services";
-import { PAGES } from "../../helpers";
+import { PAGES, getErrorText } from "../../helpers";
 import {mapActions, mapMutations, mapState} from "vuex";
 
 export default {
@@ -79,18 +79,15 @@ export default {
     data() {
         return {
             rollLoading: false,
-            rollError: null,
             roll: null,
             prevRoll1: null,
             prevRoll2: null,
 
             storedRoll: null,
             storeRollLoading: false,
-            storeRollError: null,
 
             name: null,
             createCharacterLoading: false,
-            createCharacterError: null
         }
     },
     computed: {
@@ -122,7 +119,9 @@ export default {
                 this.prevRoll1 = this.roll;
                 this.roll = data.Logbook.StatsRoll;
             })
-            .catch(error => this.rollError = error)
+            .catch(error => {
+                this.$bvToast.toast(getErrorText(error), { variant: 'danger', title: 'Roll error!' });
+            })
             .finally(() => this.rollLoading = false)
         },
         storeRoll() {
@@ -133,10 +132,11 @@ export default {
                 PlayerName: this.playerName
             })
             .then(data => this.storedRoll = data)
-            .catch(error => this.storeRollError = error)
+            .catch(error => {
+                this.$bvToast.toast(getErrorText(error), { variant: 'danger', title: 'Store roll error!' });
+            })
             .finally(() => this.storeRollLoading = false)
         },
-        // TODO: handle errors
         saveRoll() {
             this.createCharacterLoading = true;
 
@@ -157,7 +157,9 @@ export default {
                 }
                 else this.$router.push({name: PAGES.characters.myCharacters});
             })
-            .catch(error => this.createCharacterError = error)
+            .catch(error => {
+                this.$bvToast.toast(getErrorText(error), { variant: 'danger', title: 'Create character error!' });
+            })
             .finally(() => this.createCharacterLoading = false)
         },
         computeRollClass(roll) {

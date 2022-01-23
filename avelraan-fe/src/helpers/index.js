@@ -30,20 +30,25 @@ export const PAGES = {
 
 export const throwServerError = (status) => {
     throw { name: ERROR_NAME.serverError, status }
-}
+};
 
 export const throwCustomError = (message) => {
     throw { name: ERROR_NAME.customError, message }
-}
+};
 
 export const getErrorText = (error) => {
     if (error === null || typeof error === 'undefined') return null;
+
     else if (error.name === ERROR_NAME.customError) {
+        if (error.message.startsWith('BadRequest')) error.message = 'BadRequest';
+
         switch (error.message) {
             case 'ResourceNotFound: the symbol ward matched no player.':
-                return 'The username, ward or symbol is invalid.'
+                return 'The username, ward or symbol is invalid.';
             case 'Failure: player already exists.':
-                return 'A player with such username already exists. Please try another one.'
+                return 'A player with such username already exists. Please try another one.';
+            case 'BadRequest':
+                return 'Failed to process the request.';
             default:
                 return error.message;
         }
@@ -69,8 +74,8 @@ export const getErrorText = (error) => {
     else {
         return 'Something went wrong, please try again later';
     }
-}
+};
 
 export const isCustomError = (error) => {
     return error.name === ERROR_NAME.customError;
-}
+};

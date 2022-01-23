@@ -100,22 +100,19 @@
             </b-col>
         </b-row>
 
-        <toaster id="auth-error-toast" :text="error"></toaster>
     </div>
 
 </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import Toaster from "../components/shared/Toaster";
+import {mapState, mapActions, mapMutations} from "vuex";
 
 const SIGN_IN = 'Sign in', SIGN_UP = 'Sign up';
 const EPSILON = 'Epsilon', OMICRON = 'Omicron', SIGMA = 'Sigma';
 
 export default {
     name: "Home",
-    components: { Toaster },
     data() {
         return {
             tab: SIGN_IN,
@@ -163,7 +160,10 @@ export default {
     },
     watch: {
         error(newVal) {
-            if (newVal) this.$bvToast.show('auth-error-toast');
+            if (newVal) {
+                this.$bvToast.toast(newVal, {variant: 'danger', title: 'Error!'});
+                this.setError(null);
+            }
         }
     },
     methods: {
@@ -172,9 +172,10 @@ export default {
             signUp: 'playerData/signUp',
             logOut: 'playerData/logOut'
         }),
+        ...mapMutations({
+            setError: 'playerData/setError'
+        }),
         async authenticateUser() {
-            this.$bvToast.hide('auth-error-toast');
-
             if (this.tab === SIGN_IN) {
                 await this.signIn({
                     "PlayerName": this.username,
