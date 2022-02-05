@@ -139,3 +139,37 @@ export const equipItem = (payload) => {
             else return JSON.parse(data.Data);
         })
 };
+
+export const getCharacterLevelUp = (payload) => {
+    const query = { message: encodeURIComponent(JSON.stringify(payload)) };
+
+    return fetch(baseUrl + 'GetCharacterLevelup?' + getQueryString(query), {
+        headers
+    })
+        .then(response => {
+            if (response.ok) return response.json();
+            else throwServerError(response.status);
+        })
+        .then(data => {
+            if (data['Error']) throwCustomError(data['Error']);
+            else return JSON.parse(data.Data);
+        })
+};
+
+export const characterLevelUp = (payload) => {
+    return fetch(baseUrl + 'LevelupCharacter', {
+        headers,
+        method: 'POST',
+        body: JSON.stringify({
+            message: JSON.stringify(payload)
+        })
+    })
+        .then(response => {
+            if (response.ok) return response.json();
+            else throwServerError(response.status);
+        })
+        .then(data => {
+            if (data['Error']) throwCustomError(data['Error']);
+            else return data.Data;
+        })
+};

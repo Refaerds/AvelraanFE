@@ -36,9 +36,13 @@ a.nav-link.active { box-shadow: $av-shadow-green 0px 0px 3px 1px !important; }
 .popover {
   background-color: $av-light-yellow;
 
-  .arrow:after {
-    border-right-color: $av-light-yellow;
-  }
+  .arrow:after { border-right-color: $av-light-yellow; }
+  .arrow:before { border-left-color: $av-light-yellow; }
+}
+.tooltip{
+  .tooltip-inner { background-color: $dark; }
+  .arrow:after { border-right-color: $dark; }
+  .arrow:before { border-left-color: $dark; }
 }
 
 // Toaster

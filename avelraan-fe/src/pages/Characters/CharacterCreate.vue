@@ -52,7 +52,7 @@
     </div>
 
     <span id="save_roll">
-        <b-button variant="warning" class="text-nowrap"
+        <b-button variant="success" class="text-nowrap"
                   @click="saveRoll"
                   :disabled="!storedRoll || storeRollLoading || !name || createCharacterLoading"
         >

@@ -239,26 +239,7 @@ export default {
 </script>
 
 <style scoped>
-.av-columns-3 {
-    columns: 3;
-}
-
-.av-columns-2 {
-    columns: 2;
-}
-
-.eq-slot {
-    width: 8rem;
-    height: 8rem;
-}
-
 .fill-opacity-20 {
     fill-opacity: 0.2;
-}
-
-@media screen and (min-width: 768px) and (max-width: 992px), (max-width: 450px) {
-    .av-columns-3 {
-        columns: 2;
-    }
 }
 </style>

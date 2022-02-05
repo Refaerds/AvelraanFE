@@ -124,3 +124,12 @@ a.disabled { pointer-events: none; }
 ::-webkit-scrollbar-thumb:hover {
   background: $av-dim-green;
 }
+
+// Columns
+.av-columns-3 { columns: 3; }
+
+.av-columns-2 { columns: 2; }
+
+@media screen and (min-width: 768px) and (max-width: 992px), (max-width: 450px) {
+  .av-columns-3 { columns: 2; }
+}
