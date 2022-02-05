@@ -208,7 +208,7 @@ export default {
             return this.selectedCharacter.Equippment?.Ranged;
         },
         armorItem() {
-            return this.selectedCharacter.Equippment?.Armor;
+            return this.selectedCharacter.Equippment?.Armour;
         },
         trinkets() {
             return this.selectedCharacter.Equippment?.Trinkets?.filter(trinket => trinket);
